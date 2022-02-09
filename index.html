@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Tip calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+    *{
+      border-radius: 1vh;
+      font-family: "Space Mono";
+      border-style: none;
+    }
+    #bill, #num-people{
+      text-align: end;
+    }
+    #bill:hover, #num-people:hover{
+      border: 2px hsl(172, 67%, 45%) solid;
+    }
+    h1, .label{
+      font-size: 12px;
+        color:hsl(184, 14%, 56%);
+        font-weight: 700;
+        margin-bottom: 1vh;
+      }
+    body{
+      background-color: hsl(185, 41%, 84%);
+    }
+    #container{
+      display: flex;
+      margin: auto;
+      width: 80vh;
+      background-color: hsl(0, 0%, 100%);
+      border-radius: 2vh;
+      padding: 3vh;
+      justify-content: space-between;
+      gap: 5vh;
+      box-shadow: 20px 20px 15px rgba(119, 118, 118, 0.185);
+    }
+    #calculation{
+      display: flex;
+      flex-direction: column;
+    }
+    #results{
+      display: flex;
+      flex-direction: column;
+      background-color: hsl(183, 100%, 15%);
+      color: hsl(0, 0%, 100%);
+      padding: 3vh;
+      width: 50%;
+      justify-content: space-between;
+    }
+    button:active{
+      background-color:hsl(172, 67%, 45%);
+      color: hsl(183, 100%, 15%);
+    }
+    button{
+      width: 29%;
+      border-style: none;
+      background-color: hsl(183, 100%, 15%);
+      color: hsl(0, 0%, 100%);
+      margin: 0.5vh 0.25vh;
+      border-radius: 0.5vh;
+      padding: 0.5vh;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    button:hover{
+      opacity: 80%;
+    }
+    #custom{
+      width: 29%;
+      font-size: 2vh;
+      text-align: center;
+      border-style: none;
+      border-radius: 0.5vh;
+      background-color:hsl(184, 14%, 56%);
+      font-weight: 600;
+      color:hsl(183, 100%, 15%);
+    }
+    .num-output{
+      max-width: 12vh;
+      overflow: scroll;
+    }
+    #bill{
+        background: url(images/icon-dollar.svg) no-repeat scroll 7px 7px;
+      }
+    #num-people{
+      background: url(images/icon-person.svg) no-repeat scroll 7px 7px;
+    }
+    #bill, #num-people, #custom{
+      background-color: hsl(189, 41%, 97%);
+      padding: 0.7vh;
+    }
+    #reset{
+      background-color: hsl(172, 67%, 45%);
+      color: hsl(183, 100%, 15%);
+      width: 100%;
+    }
+
+    .select-tip{
+      margin: 2vh 0;
+    }
+
+    #logo{
+      display: block;
+      box-sizing: border-box;
+      margin: 10vh auto;
+      height: 5vh;
+    }
+    .tip-amount, .total{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .tip-amount p, .total p{
+      font-size: 26px;
+      margin: 0px;
+      font-weight: 600;
+      color:hsl(172, 67%, 45%);
+    }
+
+    @media only screen and (max-width: 700px) {
+      #container{
+        flex-direction: column;
+        width: 80%;
+      }
+      #results{
+        width: 100%;
+        box-sizing: border-box;
+      }
+      button, #custom{
+        width: 47%;
+        box-sizing: border-box;
+      }
+      #logo{
+        height: 7vh;
+        margin: 5vh auto;
+      }
+    }
+    @media only screen and (max-width: 400px){
+      button, #custom{
+        width: 43%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <img id ="logo" src ="images/logo.svg">
+  <div id="container">
+    <div id="calculation">
+      <label class="label" for="bill">Bill</label>
+      <input type="number" id="bill" name="bill"min="0" step="0.01">
+      <div class="select-tip">
+        <h1>Select Tip %</h1>
+        <button id="5">5%</button>
+        <button id="10">10%</button>
+        <button id="15">15%</button>
+        <button id="25">25%</button>
+        <button id="50">50%</button>
+        <input type="number" id="custom" name="bill"
+        min="0" step="0.01" placeholder="Custom">
+      </div>
+      <label class="label" for="num-people">Number of People</label>
+      <input type="number" id="num-people" name="bill" min="1" step="1">
+    </div>
+    <div id="results">
+      <div class="tip-amount">
+        <div>
+          Tip Amount
+          <h1>/ person</h1>
+        </div>
+        <div class="num-output">
+          <p>$<span id = "tips">0.00</span></p>
+        </div>
+      </div> 
+      <div class="total"> 
+        <div>
+          <div>
+          Total
+          <h1>/ person</h1>
+        </div>
+        </div>
+        <div class="num-output">
+          <p>$<span id="total-per-person">0.00</span></p>
+        </div>
+      </div>  
+      <br>
+      <button id ="reset">RESET</button>
+    </div>
+    </div>
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/siumairice">siumai</a>.
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
